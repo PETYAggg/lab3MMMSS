@@ -188,7 +188,6 @@ public class Functions {
                     if (option.equals("y"))  secondOption();
                 } catch (Exception e) {
                     System.out.println("Incorrect input");
-                    firstOptionMenu();
                 }
                 return 0;
             }
