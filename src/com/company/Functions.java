@@ -146,17 +146,54 @@ public class Functions {
 
         }
 
-        System.out.println("Input second interval: ");
-        second = setInterval();
+        while (true) {
+            System.out.println("Input second interval: ");
+            second = setInterval();
 
-        switch (operator) {
-            case "+": {
-                result = Operations.sum(first,second);
-                System.out.println(first.outputInterval()+" "+operator+ " "+second.outputInterval()+" = "+result.outputInterval());
+            switch (operator) {
+                case "+": {
+                    result = Operations.sum(first, second);
+                    System.out.println(first.outputInterval() + " " + operator + " " + second.outputInterval() + " = " + result.outputInterval());
+                    break;
+                }
+                case "-": {
+                    result = Operations.substraction(first, second);
+                    System.out.println(first.outputInterval() + " " + operator + " " + second.outputInterval() + " = " + result.outputInterval());
+                    break;
+                }
+                case "*": {
+                    result = Operations.multiply(first, second);
+                    System.out.println(first.outputInterval() + " " + operator + " " + second.outputInterval() + " = " + result.outputInterval());
+                    break;
+                }
+                case "/": {
+                    if (second.getA() == 0 || second.getB() == 0) {
+                        System.out.println(" ");
+                        System.out.println("Second interval contains zeros, unable to divide, try again!");
+                        System.out.println(" ");
+                        continue;
+                    }
+                    result = Operations.sum(first, second);
+                    System.out.println(first.outputInterval() + " " + operator + " " + second.outputInterval() + " = " + result.outputInterval());
+                    break;
+                }
+            }
+
+            while (true) {
+                try {
+                    System.out.println(" ");
+                    System.out.println("Anything else? y/n");
+                    Scanner sc = new Scanner(System.in);
+                    String option = sc.nextLine();
+                    if (option.equals("y"))  secondOption();
+                } catch (Exception e) {
+                    System.out.println("Incorrect input");
+                    firstOptionMenu();
+                }
+                return 0;
             }
         }
 
-        return 0;
     }
 
 }
