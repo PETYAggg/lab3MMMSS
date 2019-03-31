@@ -56,11 +56,21 @@ public class Operations {
         if(b.getA()==0|| b.getB()==0) {
             throw new RuntimeException("Interval b contains zero");
         }
+//        if(b.getA()*b.getB()<=0) {
+//            Interval minTemp = new Interval();
+//            Interval maxTemp = new Interval();
+//            return null;
+//
+//        } else {
         Interval temp1 = new Interval();
-        temp1.setParams((1/b.getB()),(1/b.getA()));
+        double first = Math.min(Math.min(a.getB() / b.getB(), a.getB() / b.getA()), Math.min(a.getA() / b.getB(), a.getA() / b.getA()));
+        double second = Math.max(Math.max(a.getB() / b.getB(), a.getB() / b.getA()), Math.max(a.getA() / b.getB(), a.getA() / b.getA()));
 
-        Interval result = multiply(a,temp1);
+        Interval result = new Interval();
+        result.setParams(first, second);
         return result;
+
+
     }
 }
 

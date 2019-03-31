@@ -33,6 +33,10 @@ public class Main {
                 if (Functions.secondOption() == 0) mainMenu();
                 break;
             }
+            case 3: {
+                if (Functions.thirdOption() == 0) mainMenu();
+                break;
+            }
             case -1:{
                 System.out.println("Bye bye!");
                 return;
@@ -51,5 +55,6 @@ public class Main {
     public static void main(String[] args) {
 
        mainMenu();
+
     }
 }

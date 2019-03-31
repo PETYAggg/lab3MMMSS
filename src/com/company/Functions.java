@@ -241,22 +241,39 @@ public class Functions {
         e = new Interval();
         f = new Interval();
         Interval odunucya = new Interval();
-        a.setParams(2, 4);
-        b.setParams(-2, 1);
-        c.setParams(-1, 2);
-        d.setParams(2, 4);
+        a.setParams(-1, 2);
+        b.setParams(1, 2);
+        c.setParams(-1, 0);
+        d.setParams(1, 4);
 
         e.setParams(1, 2);
-        f.setParams(1, 2);
+        f.setParams(0, 2);
         odunucya.setParams(1, 1);
+
+        if (Operations.substraction(Operations.multiply(a, d), Operations.multiply(b, c)).getA() * Operations.substraction(Operations.multiply(a, d), Operations.multiply(b, c)).getB() <= 0) {
+            System.out.println(" ");
+            System.out.println(" ");
+            System.out.println("Determinant of a contains zero: " + Operations.substraction(Operations.multiply(a, d), Operations.multiply(b, c)).outputInterval());
+            System.out.println(" ");
+            System.out.println(" ");
+            return 0;
+        }
         if (d.getA() * d.getB() > 0) {
             intervals[0][0] = Operations.divide(odunucya, Operations.substraction(a, Operations.divide(Operations.multiply(b, c), d)));
         } else {
             Interval temp = new Interval();
             Interval minTemp = new Interval();
             Interval maxTemp = new Interval();
-            minTemp.setParams(Math.min(d.getA(), d.getB()), Math.min(d.getA(), d.getB()));
-            maxTemp.setParams(Math.max(d.getA(), d.getB()), Math.max(d.getA(), d.getB()));
+
+//            Interval minTempC = new Interval();
+//            Interval maxTempC = new Interval();
+//
+//            minTempC.setParams(c.getB(),c.getB());
+//            maxTempC.setParams(c.getA(), c.getB());
+
+            minTemp.setParams(d.getB(), d.getB());
+            maxTemp.setParams(d.getA(), d.getA());
+
             double aMinus = Math.min(Operations.divide(minTemp, (Operations.substraction(Operations.multiply(a, minTemp), Operations.multiply(b, c)))).getA(), Operations.divide(minTemp, (Operations.substraction(Operations.multiply(a, minTemp), Operations.multiply(b, c)))).getB());
             double aPlus = Math.max(Operations.divide(maxTemp, (Operations.substraction(Operations.multiply(a, maxTemp), Operations.multiply(b, c)))).getA(), Operations.divide(maxTemp, (Operations.substraction(Operations.multiply(a, maxTemp), Operations.multiply(b, c)))).getB());
             temp.setParams(aMinus, aPlus);
@@ -271,6 +288,8 @@ public class Functions {
             Interval maxTemp = new Interval();
             minTemp.setParams(b.getB(), b.getB());
             maxTemp.setParams(b.getA(), b.getA());
+
+
             double aMinus = Math.min(Operations.divide(minTemp, (Operations.substraction(Operations.multiply(minTemp, c), Operations.multiply(a, d)))).getA(), Operations.divide(minTemp, (Operations.substraction(Operations.multiply(minTemp, c), Operations.multiply(a, d)))).getB());
             double aPlus = Math.max(Operations.divide(maxTemp, (Operations.substraction(Operations.multiply(maxTemp, c), Operations.multiply(a, d)))).getA(), Operations.divide(maxTemp, (Operations.substraction(Operations.multiply(maxTemp, c), Operations.multiply(a, d)))).getB());
             temp.setParams(aMinus, aPlus);
@@ -286,6 +305,8 @@ public class Functions {
             Interval maxTemp = new Interval();
             minTemp.setParams(c.getB(), c.getB());
             maxTemp.setParams(c.getA(), c.getA());
+
+
             double aMinus = Math.min(Operations.divide(minTemp, (Operations.substraction(Operations.multiply(b, minTemp), Operations.multiply(a, d)))).getA(), Operations.divide(minTemp, (Operations.substraction(Operations.multiply(b, minTemp), Operations.multiply(a, d)))).getB());
             double aPlus = Math.max(Operations.divide(maxTemp, (Operations.substraction(Operations.multiply(b, maxTemp), Operations.multiply(a, d)))).getA(), Operations.divide(maxTemp, (Operations.substraction(Operations.multiply(b, maxTemp), Operations.multiply(a, d)))).getB());
             temp.setParams(aMinus, aPlus);
@@ -293,14 +314,17 @@ public class Functions {
             //System.out.println(intervals[1][0].outputInterval());
         }
 
-        if (a.getA() * a.getB() > 0) {
+        if (a.getA() * a.getB() > 0 & c.getA() * c.getB() > 0) {
             intervals[1][1] = Operations.divide(odunucya, Operations.substraction(d, Operations.divide(Operations.multiply(b, c), a)));
         } else {
             Interval temp = new Interval();
             Interval minTemp = new Interval();
             Interval maxTemp = new Interval();
-            minTemp.setParams(Math.min(a.getA(), a.getB()), Math.min(a.getA(), a.getB()));
-            maxTemp.setParams(Math.max(a.getA(), a.getB()), Math.max(a.getA(), a.getB()));
+            minTemp.setParams(a.getB(), a.getB());
+            maxTemp.setParams(a.getA(), a.getB());
+
+
+
             double aMinus = Math.min(Operations.divide(minTemp, (Operations.substraction(Operations.multiply(minTemp, d), Operations.multiply(b, c)))).getA(), Operations.divide(minTemp, (Operations.substraction(Operations.multiply(minTemp, d), Operations.multiply(b, c)))).getB());
             double aPlus = Math.max(Operations.divide(maxTemp, (Operations.substraction(Operations.multiply(maxTemp, d), Operations.multiply(b, c)))).getA(), Operations.divide(maxTemp, (Operations.substraction(Operations.multiply(maxTemp, d), Operations.multiply(b, c)))).getB());
             temp.setParams(aMinus, aPlus);
@@ -310,9 +334,23 @@ public class Functions {
 
         result[0] = Operations.sum(Operations.multiply(intervals[0][0], e), Operations.multiply(intervals[0][1], f));
         result[1] = Operations.sum(Operations.multiply(intervals[1][0], e), Operations.multiply(intervals[1][1], f));
+        System.out.println(" ");
+        System.out.println(" ");
 
-        System.out.println(result[0].outputInterval());
-        System.out.println(result[1].outputInterval());
+        System.out.println("A = " + a.outputInterval() + " " + b.outputInterval());
+        System.out.println("    " + c.outputInterval() + " " + d.outputInterval());
+        System.out.println(" ");
+        System.out.println(" ");
+
+        System.out.println("B = " + e.outputInterval());
+        System.out.println("    " + f.outputInterval());
+        System.out.println(" ");
+        System.out.println(" ");
+
+        System.out.println("X = " + result[0].outputInterval());
+        System.out.println("    " + result[1].outputInterval());
+        System.out.println(" ");
+        System.out.println(" ");
 
         return 0;
 
