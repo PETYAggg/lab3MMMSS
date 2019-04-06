@@ -53,7 +53,7 @@ public class Operations {
      * @throws RuntimeException
      */
     public static Interval divide (Interval a, Interval b) throws RuntimeException{
-        if(b.getA()==0|| b.getB()==0) {
+        if (b.getA() * b.getB() <= 0) {
             throw new RuntimeException("Interval b contains zero");
         }
 //        if(b.getA()*b.getB()<=0) {
@@ -63,7 +63,7 @@ public class Operations {
 //
 //        } else {
         Interval temp1 = new Interval();
-        double first = Math.min(Math.min(a.getB() / b.getB(), a.getB() / b.getA()), Math.min(a.getA() / b.getB(), a.getA() / b.getA()));
+        double first = Math.min(Math.min((a.getB() / b.getB()), (a.getB() / b.getA())), Math.min((a.getA() / b.getB()), (a.getA() / b.getA())));
         double second = Math.max(Math.max(a.getB() / b.getB(), a.getB() / b.getA()), Math.max(a.getA() / b.getB(), a.getA() / b.getA()));
 
         Interval result = new Interval();

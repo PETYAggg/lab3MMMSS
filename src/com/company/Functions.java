@@ -191,7 +191,7 @@ public class Functions {
                         System.out.println(" ");
                         continue;
                     }
-                    result = Operations.sum(first, second);
+                    result = Operations.divide(first, second);
                     System.out.println(first.outputInterval() + " " + operator + " " + second.outputInterval() + " = " + result.outputInterval());
                     break;
                 }
@@ -241,13 +241,13 @@ public class Functions {
         e = new Interval();
         f = new Interval();
         Interval odunucya = new Interval();
-        a.setParams(-1, 2);
-        b.setParams(1, 2);
-        c.setParams(-1, 0);
-        d.setParams(1, 4);
+        a.setParams(2, 4);
+        b.setParams(-2, 1);
+        c.setParams(-1, 2);
+        d.setParams(2, 4);
 
         e.setParams(1, 2);
-        f.setParams(0, 2);
+        f.setParams(1, 2);
         odunucya.setParams(1, 1);
 
         if (Operations.substraction(Operations.multiply(a, d), Operations.multiply(b, c)).getA() * Operations.substraction(Operations.multiply(a, d), Operations.multiply(b, c)).getB() <= 0) {
@@ -314,7 +314,7 @@ public class Functions {
             //System.out.println(intervals[1][0].outputInterval());
         }
 
-        if (a.getA() * a.getB() > 0 & c.getA() * c.getB() > 0) {
+        if (a.getA() * a.getB() > 0) {
             intervals[1][1] = Operations.divide(odunucya, Operations.substraction(d, Operations.divide(Operations.multiply(b, c), a)));
         } else {
             Interval temp = new Interval();
@@ -339,6 +339,14 @@ public class Functions {
 
         System.out.println("A = " + a.outputInterval() + " " + b.outputInterval());
         System.out.println("    " + c.outputInterval() + " " + d.outputInterval());
+        System.out.println(" ");
+        System.out.println(" ");
+
+        System.out.println(" ");
+        System.out.println(" ");
+
+        System.out.println("A-1 = " + intervals[0][0].outputInterval() + " " + intervals[0][1].outputInterval());
+        System.out.println("    " + intervals[1][0].outputInterval() + " " + intervals[1][1].outputInterval());
         System.out.println(" ");
         System.out.println(" ");
 
